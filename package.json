@@ -1,0 +1,11 @@
+{
+  "name": "my-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": ["packages/**"],
+  "scripts" : {
+    "start:client" : "yarn workspace client start",
+    "start:server"  :"yarn workspace server start" , 
+    "start" : "yarn start:client && yarn start:server"
+  }
+}
