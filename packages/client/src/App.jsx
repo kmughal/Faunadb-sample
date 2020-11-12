@@ -22,6 +22,7 @@ export default () => {
             <button onClick={getDetails}>Get Reference Id from Database</button>
         </div>
         {data && (<Todo email={data?.data?.email}></Todo>)}
+        {data && (<GetAllTodosByEmail email={data?.data?.email}/>)}
     </section>
 }
 
@@ -57,4 +58,19 @@ function Todo({email}) {
         </div>
     </section>
     </>
+}
+
+function GetAllTodosByEmail({email}) {
+    const [data,setdata] = React.useState(null);
+    const todosHandler = event => {
+        fetch("http://localhost:3000/alltodos?email=" + email).then(r =>r.json()).then(setdata).catch(console.error);
+    };
+    console.log(data?.data);
+    return <>
+        <button onClick={todosHandler}>Fetch all todos</button>
+        <ul>{
+            data?.data.map((x,i)=> <li key={i}>{x}</li>)
+           
+        }</ul>
+    </>;
 }
